@@ -1,0 +1,8 @@
+App\Model\Input\UserRequestModel:
+  properties:
+    username:
+      - Email: ~
+    password:
+      - NotBlank: ~
+      - Length:
+          min: 6

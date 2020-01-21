@@ -1,0 +1,28 @@
+fos_rest:
+  param_fetcher_listener:  true
+  allowed_methods_listener:  true
+  routing_loader: true
+
+  view:
+    view_response_listener:  true
+
+  format_listener:
+    rules:
+      - { path: ^/api, prefer_extension: true, fallback_format: json, priorities: [ json, html ] }
+
+  body_converter:
+    enabled: false
+    validate: false
+
+  body_listener:
+    array_normalizer: fos_rest.normalizer.camel_keys
+
+  exception:
+    enabled: true
+    exception_controller: 'fos_rest.exception.twig_controller:showAction'
+    codes:
+      App\Exception\ModelValidationException: HTTP_BAD_REQUEST
+      App\Exception\TeamDoesNotTakePartInEventException: HTTP_BAD_REQUEST
+      App\Exception\EventNotFoundException: HTTP_NOT_FOUND
+      App\Exception\EventCommentNotFoundException: HTTP_NOT_FOUND
+      App\Exception\TeamNotFoundException: HTTP_NOT_FOUND

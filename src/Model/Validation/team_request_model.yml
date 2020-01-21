@@ -1,0 +1,6 @@
+App\Model\Input\TeamRequestModel:
+  properties:
+    name:
+      - NotBlank: ~
+      - Length:
+          min: 3

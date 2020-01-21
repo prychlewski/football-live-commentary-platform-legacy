@@ -1,0 +1,15 @@
+App\Model\Input\EventRequestModel:
+  properties:
+    hostTeamId:
+      - NotBlank: ~
+      - Type: int
+      - Range:
+          min: 1
+    guestTeamId:
+      - NotBlank: ~
+      - Type: int
+      - Range:
+          min: 1
+    date:
+      - NotBlank: ~
+      - DateTime: ~

@@ -1,0 +1,9 @@
+# Route for JWT redirect
+api_auth_login:
+    path: /api/auth/login
+    methods:  [POST]
+
+# Prefix all controllers with the api part
+api:
+    prefix: /api
+    resource: '../src/Controller'
