@@ -5,7 +5,7 @@ namespace App\Model\Response;
 use DateTime;
 use JMS\Serializer\Annotation\Type;
 
-final class EventResponse
+final class FootballMatchResponse
 {
     /**
      * @var int

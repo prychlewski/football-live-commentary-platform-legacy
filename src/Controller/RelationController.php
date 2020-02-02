@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Model\Request\EventCommentRequestModel;
-use App\Model\Response\EventCommentResponse;
-use App\Service\EventCommentService;
+use App\Model\Request\CommentRequestModel;
+use App\Model\Response\CommentResponse;
+use App\Service\CommentService;
 use FOS\RestBundle\Controller\Annotations\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RelationController extends BaseController
 {
-    private $eventCommentService;
+    private $commentService;
 
     /**
      * @var ValidatorInterface
@@ -20,86 +20,86 @@ class RelationController extends BaseController
     private $validator;
 
     public function __construct(
-        EventCommentService $eventCommentService,
+        CommentService $commentService,
         ValidatorInterface $validator
     ) {
-        $this->eventCommentService = $eventCommentService;
+        $this->commentService = $commentService;
         $this->validator = $validator;
     }
 
     /**
-     * @Route("/relation/event/{id}", name="event_comment_add",  methods={"POST"})
+     * @Route("/relation/football-match/{id}", name="comment_add",  methods={"POST"})
      */
     public function addAction(Request $request, int $id)
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $eventCommentRequestModel = new EventCommentRequestModel($request->request->get('content'));
+        $commentRequestModel = new CommentRequestModel($request->request->get('content'));
 
-        $validationErrors = $this->validator->validate($eventCommentRequestModel);
+        $validationErrors = $this->validator->validate($commentRequestModel);
         $this->handleErrors($validationErrors);
 
-        $eventComment = $this->eventCommentService->createAndSaveEventComment(
+        $comment = $this->commentService->createAndSaveComment(
             $id,
-            $eventCommentRequestModel->getContent()
+            $commentRequestModel->getContent()
         );
 
-        $response = new EventCommentResponse(
-            $eventComment->getId(),
-            $eventCommentRequestModel->getContent(),
-            $eventComment->getDate()
+        $response = new CommentResponse(
+            $comment->getId(),
+            $commentRequestModel->getContent(),
+            $comment->getDate()
         );
 
         return $this->view($response);
     }
 
     /**
-     * @Route("/relation/{id}", name="event_comment_edit",  methods={"PATCH"})
+     * @Route("/relation/{id}", name="comment_edit",  methods={"PATCH"})
      */
     public function editAction(Request $request, int $id)
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $eventCommentRequestModel = new EventCommentRequestModel($request->request->get('content'));
+        $commentRequestModel = new CommentRequestModel($request->request->get('content'));
 
-        $validationErrors = $this->validator->validate($eventCommentRequestModel);
+        $validationErrors = $this->validator->validate($commentRequestModel);
         $this->handleErrors($validationErrors);
 
-        $eventComment = $this->eventCommentService->update(
+        $comment = $this->commentService->update(
             $id,
-            $eventCommentRequestModel->getContent()
+            $commentRequestModel->getContent()
         );
 
-        $response = new EventCommentResponse(
-            $eventComment->getId(),
-            $eventCommentRequestModel->getContent(),
-            $eventComment->getDate()
+        $response = new CommentResponse(
+            $comment->getId(),
+            $commentRequestModel->getContent(),
+            $comment->getDate()
         );
 
         return $this->view($response);
     }
 
     /**
-     * @Route("/relation/{id}", name="event_comment_delete",  methods={"DELETE"})
+     * @Route("/relation/{id}", name="comment_delete",  methods={"DELETE"})
      */
     public function deleteAction(int $id)
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $this->eventCommentService->delete($id);
+        $this->commentService->delete($id);
 
         return $this->view(null, Response::HTTP_NO_CONTENT);
     }
 
     /**
-     * @Route("/relation/event/{id}/complete", name="event_comments_view",  methods={"GET"})
+     * @Route("/relation/football-match/{id}/complete", name="comments_view",  methods={"GET"})
      */
     public function viewAction(int $id)
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
-        $eventComments = $this->eventCommentService->findEventComments($id);
+        $comments = $this->commentService->findComments($id);
 
-        return $this->view($eventComments);
+        return $this->view($comments);
     }
 }

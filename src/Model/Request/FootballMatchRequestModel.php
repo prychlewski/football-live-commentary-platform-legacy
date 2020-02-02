@@ -7,7 +7,7 @@ use DateTime;
 use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Annotation\Type;
 
-class EventRequestModel
+class FootballMatchRequestModel
 {
 
     /**

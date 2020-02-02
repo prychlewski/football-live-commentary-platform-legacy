@@ -5,7 +5,7 @@ namespace App\Model\Request;
 
 use JMS\Serializer\Annotation\Type;
 
-class EventGoalRequestModel
+class GoalRequestModel
 {
 
     /**

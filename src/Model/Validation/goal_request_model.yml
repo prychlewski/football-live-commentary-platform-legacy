@@ -1,4 +1,4 @@
-App\Model\Input\EventGoalRequestModel:
+App\Model\Input\GoalRequestModel:
   properties:
     teamId:
       - NotBlank: ~

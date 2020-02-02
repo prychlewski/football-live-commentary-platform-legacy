@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\EventCommentRepository")
+ * @ORM\Entity(repositoryClass="CommentRepository")
  */
-class EventComment
+class Comment
 {
     /**
      * @ORM\Id()
@@ -17,10 +17,10 @@ class EventComment
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Event")
+     * @ORM\ManyToOne(targetEntity="FootballMatch")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $event;
+    private $footballMatch;
 
     /**
      * @ORM\Column(type="datetime")
@@ -32,16 +32,9 @@ class EventComment
      */
     private $content;
 
-    /**
-     * EventComment constructor.
-     *
-     * @param $event
-     * @param $date
-     * @param $content
-     */
-    public function __construct(Event $event, string $content, \DateTime $date)
+    public function __construct(FootballMatch $footballMatch, string $content, \DateTime $date)
     {
-        $this->event = $event;
+        $this->footballMatch = $footballMatch;
         $this->date = $date;
         $this->content = $content;
     }
@@ -52,14 +45,14 @@ class EventComment
         return $this->id;
     }
 
-    public function getEvent(): ?Event
+    public function getFootballMatch(): ?FootballMatch
     {
-        return $this->event;
+        return $this->footballMatch;
     }
 
-    public function setEvent(?Event $event): self
+    public function setFootballMatch(?FootballMatch $footballMatch): self
     {
-        $this->event = $event;
+        $this->footballMatch = $footballMatch;
 
         return $this;
     }

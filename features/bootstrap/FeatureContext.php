@@ -1,7 +1,7 @@
 <?php
 
-use App\Entity\Event; 
-use App\Entity\EventComment;
+use App\Entity\FootballMatch;
+use App\Entity\Comment;
 use App\Entity\Team;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
@@ -111,25 +111,25 @@ class FeatureContext extends MinkContext implements KernelAwareContext
     }
 
     /**
-     * @Given /^there is data in event table:$/
-     * @And /^there is data in event table:$/
+     * @Given /^there is data in match table:$/
+     * @And /^there is data in match table:$/
      */
-    public function thereIsDataInEventTable(TableNode $tableNode)
+    public function thereIsDataInMatchTable(TableNode $tableNode)
     {
         $this->storeTableNodeDataInDbTableUsingEntityClass(
-            Event::class,
+            FootballMatch::class,
             $tableNode
         );
     }
 
     /**
-     * @Given /^there is data in event_comment table:$/
-     * @And /^there is data in event_comment table:$/
+     * @Given /^there is data in comment table:$/
+     * @And /^there is data in comment table:$/
      */
-    public function thereIsDataInEventCommentTable(TableNode $tableNode)
+    public function thereIsDataInCommentTable(TableNode $tableNode)
     {
         $this->storeTableNodeDataInDbTableUsingEntityClass(
-            EventComment::class,
+            Comment::class,
             $tableNode
         );
     }

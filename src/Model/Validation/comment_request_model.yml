@@ -1,4 +1,4 @@
-App\Model\Input\EventCommentRequestModel:
+App\Model\Input\CommentRequestModel:
   properties:
     content:
       - NotBlank: ~

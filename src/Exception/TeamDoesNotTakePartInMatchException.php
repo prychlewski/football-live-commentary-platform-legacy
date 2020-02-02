@@ -4,7 +4,7 @@ namespace App\Exception;
 
 use Throwable;
 
-class TeamDoesNotTakePartInEventException extends \Exception
+class TeamDoesNotTakePartInMatchException extends \Exception
 {
     public function __construct(
         $message = 'Team does not take part in that match',

@@ -1,4 +1,4 @@
-App\Model\Input\EventRequestModel:
+App\Model\Input\FootballMatchRequestModel:
   properties:
     hostTeamId:
       - NotBlank: ~
